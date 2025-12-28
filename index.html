@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Objek Wisata Sulawesi Barat</title>
+<style>
+    :root{--blue:#0a64d3;--green:#14a44d;--bg:#f0f4f9}
+    body { margin:0; background:var(--bg); font-family: Arial, sans-serif; color:#222; }
+    .header { background: var(--blue); color: #fff; padding: 40px 20px; text-align:center;
+              font-size:28px; font-weight:700; letter-spacing:1px; }
+    .container { width:95%; max-width:1300px; margin:30px auto; display:grid;
+                 grid-template-columns: 2fr 1fr; gap:25px; }
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
+    .card { background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.08);
+           padding:15px; transition:transform .18s ease; }
+    .card:hover{ transform:translateY(-6px); }
+    .card img{ width:100%; height:180px; object-fit:cover; border-radius:8px; }
+    .card h3{ margin:10px 0 6px 0; font-size:18px; }
+    .location{ display:flex; align-items:center; font-size:14px; color:#555; margin-bottom:6px;}
+    .price{ font-weight:700; color: #005dd1; margin:8px 0; }
+    .btn-blue, .btn-green{ padding:8px 12px; border:none; border-radius:20px; cursor:pointer;
+                            font-size:13px; font-weight:700; margin-right:8px; }
+    .btn-blue{ background:var(--blue); color:#fff; }
+    .btn-green{ background:var(--green); color:#fff; }
+    .sidebar{ background:#fff; padding:15px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.08); }
+    .sidebar iframe{ width:100%; height:250px; border-radius:8px; border:0; }
+    @media (max-width:900px){
+        .container{ grid-template-columns:1fr; }
+        .grid{ grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width:600px){
+        .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Popup shared style */
+    .popup-container { display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+                      background: rgba(0,0,0,0.55); justify-content:center; align-items:center;
+                      z-index:9999; padding:20px; box-sizing:border-box; }
+    .popup-box { background:#fff; width:100%; max-width:520px; border-radius:12px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,0.2); }
+    .popup-box h2{ margin:0 0 8px 0; font-size:20px; }
+    .popup-box p{ margin:6px 0; color:#333; line-height:1.45; }
+    .popup-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .popup-box input[type="text"], .popup-box input[type="number"], .popup-box input[type="date"], .popup-box textarea{
+        width:100%; padding:9px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; margin-top:6px;
+    }
+    .popup-actions{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+    .btn-close{ background:#d33; color:#fff; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
+
+    /* small helper */
+    .muted{ color:#666; font-size:13px; }
+</style>
+</head>
+<body>
+
+    <div class="header">OBJEK WISATA DI SULAWESI BARAT</div>
+
+    <div class="container">
+
+        <!-- GRID WISATA -->
+        <div class="grid">
+
+            <!-- CARD 1 -->
+            <div class="card">
+                <img src="pamboborang.jpeg" alt="Bukit Pamboborang">
+                <h3>Bukit Pamboborang</h3>
+                <div class="location">📍 <span>Pamboborang, Majene, Sulawesi Barat</span></div>
+                <div class="muted">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                <div class="price">Harga Paket: Rp 350.000</div>
+                <div style="margin-top:8px;">
+                    <button class="btn-blue" onclick="openDescription(1)">Lihat Selengkapnya</button>
+                    <button class="btn-green" onclick="openOrder('Bukit Pamboborang',350000)">Pesan Sekarang</button>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="card">
+                <img src="dato.jpeg" alt="Pantai Dato'">
+                <h3>Pantai Dato'</h3>
+                <div class="location">📍 <span>Banggae Timur, Majene, Sulawesi Barat</span></div>
+                <div class="muted">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                <div class="price">Harga Paket: Rp 450.000</div>
+                <div style="margin-top:8px;">
+                    <button class="btn-blue" onclick="openDescription(2)">Lihat Selengkapnya</button>
+                    <button class="btn-green" onclick="openOrder('Pantai Dato',450000)">Pesan Sekarang</button>
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="card">
+                <img src="taraujung.jpeg" alt="Taraujung Pamboang">
+                <h3>Taraujung Pamboang</h3>
+                <div class="location">📍 <span>Pamboang, Majene, Sulawesi Barat</span></div>
+                <div class="muted">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                <div class="price">Harga Paket: Rp 500.000</div>
+                <div style="margin-top:8px;">
+                    <button class="btn-blue" onclick="openDescription(3)">Lihat Selengkapnya</button>
+                    <button class="btn-green" onclick="openOrder('Taraujung Pamboang',500000)">Pesan Sekarang</button>
+                </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="card">
+                <img src="pulau karampuang.jpeg" alt="Pulau Karampuang">
+                <h3>Pulau Karampuang</h3>
+                <div class="location">📍 <span>Mamuju, Sulawesi Barat</span></div>
+                <div class="muted">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                <div class="price">Harga Paket: Rp 500.000</div>
+                <div style="margin-top:8px;">
+                    <button class="btn-blue" onclick="openDescription(4)">Lihat Selengkapnya</button>
+                    <button class="btn-green" onclick="openOrder('Pulau Karampuang',500000)">Pesan Sekarang</button>
+                </div>
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="card">
+                <img src="desa kunyi.jpeg" alt="Desa Kunyi">
+                <h3>Desa Kunyi</h3>
+                <div class="location">📍 <span>Polewali, Sulawesi Barat</span></div>
+                <div class="muted">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                <div class="price">Harga Paket: Rp 500.000</div>
+                <div style="margin-top:8px;">
+                    <button class="btn-blue" onclick="openDescription(5)">Lihat Selengkapnya</button>
+                    <button class="btn-green" onclick="openOrder('Desa Kunyi',500000)">Pesan Sekarang</button>
+                </div>
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="card">
+                <img src="air terjun.jpeg" alt="Air Terjun Sambabo">
+                <h3>Air Terjun Sambabo</h3>
+                <div class="location">📍 <span>mamasa, Sulawesi Barat</span></div>
+                <div class="muted">⭐ ⭐ ⭐ ⭐ ⭐</div>
+                <div class="price">Harga Paket: Rp 500.000</div>
+                <div style="margin-top:8px;">
+                    <button class="btn-blue" onclick="openDescription(6)">Lihat Selengkapnya</button>
+                    <button class="btn-green" onclick="openOrder('Air Terjun Sambabo',500000)">Pesan Sekarang</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+          <iframe width="560" height="315" 
+          src="https://www.youtube.com/embed/gwF83tHbINk?si=USBx9pU5wA2d8-W0" 
+          title="YouTube video player" frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+          gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br><br>
+        
+           <iframe width="560" height="315" 
+           src="https://www.youtube.com/embed/kFGhoxwNEec?si=rzV3aBa1unZBxzeF" 
+           title="YouTube video player" frameborder="0" 
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+           gyroscope; picture-in-picture; web-share" 
+           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+          <iframe width="560" height="315" 
+          src="https://www.youtube.com/embed/H4KWLWiRqko?si=xIkBFiIdhNLKeZT2" 
+          title="YouTube video player" frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+          gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    </div>
+
+    <!-- POPUP DESKRIPSI (dipakai untuk semua card) -->
+    <div id="descPopup" class="popup-container" aria-hidden="true">
+        <div class="popup-box" role="dialog" aria-modal="true" aria-labelledby="descTitle">
+            <h2 id="descTitle">Judul</h2>
+            <p id="descShort" style="font-weight:700; margin-top:6px;"></p>
+            <p id="descLong" style="margin-top:10px;"></p>
+            <div class="popup-actions">
+                <button class="btn-blue" onclick="toggleMore()">Lihat Selengkapnya</button>
+                <button class="btn-green" onclick="openOrderFromDesc()">Pesan Sekarang</button>
+                <button class="btn-close" onclick="closeDesc()">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP PEMESANAN -->
+    <div id="orderPopup" class="popup-container" aria-hidden="true">
+        <div class="popup-box" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+            <h2 id="orderTitle">Pemesanan Paket</h2>
+
+            <div style="margin-top:8px;" class="muted">Paket: <span id="orderPaketName"></span></div>
+
+            <label style="margin-top:10px;">Nama:</label>
+            <input type="text" id="custName" placeholder="Nama lengkap">
+
+            <label>No. HP:</label>
+            <input type="text" id="custPhone" placeholder="0812345xxxx">
+
+            <label>Jumlah Peserta:</label>
+            <input type="number" id="custQty" value="2" min="1">
+
+            <label>Tanggal Perjalanan:</label>
+            <input type="date" id="custDate">
+
+           <div style="margin-top:10px;">
+    <b>Tambahan Layanan:</b>
+
+    <div class="muted">
+        <label>
+            <input type="checkbox" id="cbTransport" value="1000000">
+            Transport (Rp 1.000.000)
+        </label><br>
+
+        <label>
+            <input type="checkbox" id="cbMakan" value="100000">
+            Makan (Rp 100.000)
+        </label><br>
+
+        <label>
+            <input type="checkbox" id="cbPenginapan" value="200000">
+            Penginapan (Rp 200.000)
+        </label>
+    </div>
+</div>
+
+            <div class="popup-actions">
+                <button class="btn-blue" onclick="calculateTotal()">Hitung</button>
+                <button class="btn-green" onclick="saveOrder()">Simpan</button>
+                <button class="btn-close" onclick="closeOrder()">Tutup</button>
+            </div>
+
+            <p id="orderTotal" style="font-weight:700; margin-top:10px;"></p>
+        </div>
+    </div>
+
+<script>
+/* Data deskripsi (singkat + panjang) sesuai urutan card 1..6 */
+const descriptions = {
+    1: {
+        title: "Bukit Pamboborang",
+        short: "Bukit Pamboborang menawarkan panorama perbukitan hijau dengan udara sejuk dan suasana alam yang tenang.",
+        long: "Bukit Pamboborang merupakan salah satu destinasi wisata alam unggulan di Kabupaten Majene. Dari puncaknya, pengunjung dapat menikmati pemandangan perbukitan hijau, kota Majene, dan laut dari kejauhan. Tempat ini sangat cocok untuk kegiatan camping, fotografi, dan menikmati sunset. Akses menuju lokasi cukup mudah dan tersedia banyak spot foto alami yang Instagramable."
+    },
+    2: {
+        title: "Pantai Dato'",
+        short: "Pantai Dato' memiliki pasir putih, air laut yang jernih, serta tebing karang yang indah.",
+        long: "Pantai Dato' adalah salah satu ikon wisata bahari di Majene. Pantai ini terkenal dengan pasir putihnya yang bersih, air laut biru jernih, dan tebing karang yang menjulang di sekeliling pantai. Lokasinya dekat dengan pusat kota sehingga mudah diakses. Pengunjung dapat berenang, snorkeling, menikmati kuliner laut, atau sekadar bersantai sambil menikmati sunset yang memukau."
+    },
+    3: {
+        title: "Taraujung Pamboang",
+        short: "Taraujung Pamboang merupakan wisata pesisir dengan formasi batu karang unik dan deburan ombak laut.",
+        long: "Taraujung Pamboang adalah destinasi wisata alam yang berada di kawasan pesisir Majene. Tempat ini dikenal dengan hamparan batu karang besar yang tersebar di sepanjang pantai serta deburan ombak laut yang menghantam karang, menciptakan pemandangan yang sangat eksotis. Air lautnya jernih dan cocok untuk menikmati panorama laut, fotografi alam, serta bersantai menikmati angin laut. Taraujung Pamboang sangat populer sebagai spot foto karena keindahan batuan karangnya yang alami dan pemandangan laut lepas yang menenangkan."
+    },
+    4: {
+        title: "Pulau Karampuang",
+        short: "Pulau Karampuang adalah destinasi wisata bahari yang terkenal dengan keindahan bawah laut, terumbu karang, dan spot snorkeling yang menawan.",
+        long:  "Pulau Karampuang terletak di Teluk Mamuju, Sulawesi Barat. Pulau kecil ini menawarkan pemandangan pantai berpasir putih yang indah dan air laut yang jernih. Tempat ini menjadi surga bagi para penyelam dan penggemar snorkeling karena kekayaan biota laut, mulai dari beragam jenis ikan, penyu, hingga formasi terumbu karang yang masih alami dan berwarna-warni. Selain menikmati keindahan bawah laut, pengunjung juga dapat menjelajahi mercusuar tua yang ikonik di pulau ini."
+    },
+    5: {
+        title: "Desa Kunyi",
+        short: "Desa Kunyi dikenal sebagai desa wisata dengan keindahan alam dan budaya lokal.",
+        long: "Desa Kunyi merupakan desa wisata di Kabupaten Polewali Mandar yang menawarkan keindahan alam, sungai, serta kearifan budaya lokal masyarakat setempat. Pengunjung dapat menikmati suasana pedesaan yang asri, berinteraksi dengan warga, serta mencicipi kuliner tradisional khas daerah. Desa ini sangat cocok untuk wisata edukasi dan wisata keluarga."
+    },
+    6: {
+        title: "Air Terjun Sambabo",
+        short: "Air Terjun Sambabo menawarkan keindahan air terjun alami di tengah hutan.",
+        long: "Air Terjun Sambabo merupakan destinasi wisata alam di Kabupaten Mamasa yang dikelilingi oleh hutan hijau dan suasana alami. Airnya yang jernih dan segar membuat tempat ini cocok untuk melepas penat. Pengunjung dapat menikmati keindahan alam, berenang di kolam alami, serta merasakan ketenangan jauh dari hiruk-pikuk kota."
+    }
+};
+
+
+/* state for "more" toggle in description popup */
+let descShowingLong = false;
+let currentDescId = null;
+let lastOrderPaket = {name: '', price: 0};
+
+function openDescription(id) {
+    const data = descriptions[id];
+    if(!data) return;
+    currentDescId = id;
+    descShowingLong = false;
+    document.getElementById('descTitle').innerText = data.title;
+    document.getElementById('descShort').innerText = data.short;
+    document.getElementById('descLong').innerText = ''; // hidden initially
+    document.querySelector('#descPopup .btn-blue').innerText = 'Lihat Selengkapnya';
+    document.getElementById('descPopup').style.display = 'flex';
+    document.getElementById('descPopup').setAttribute('aria-hidden','false');
+}
+
+function toggleMore() {
+    if (!currentDescId) return;
+    const data = descriptions[currentDescId];
+    descShowingLong = !descShowingLong;
+    if(descShowingLong) {
+        document.getElementById('descLong').innerText = data.long;
+        document.querySelector('#descPopup .btn-blue').innerText = 'Sembunyikan';
+    } else {
+        document.getElementById('descLong').innerText = '';
+        document.querySelector('#descPopup .btn-blue').innerText = 'Lihat Selengkapnya';
+    }
+}
+
+function closeDesc() {
+    document.getElementById('descPopup').style.display = 'none';
+    document.getElementById('descPopup').setAttribute('aria-hidden','true');
+    currentDescId = null;
+    descShowingLong = false;
+}
+
+/* Order popup functions */
+function openOrder(paketName, paketPrice) {
+    lastOrderPaket.name = paketName;
+    lastOrderPaket.price = paketPrice || 0;
+    document.getElementById('orderPaketName').innerText = paketName + " — Rp " + paketPrice.toLocaleString('id-ID');
+    document.getElementById('orderTitle').innerText = 'Pemesanan Paket: ' + paketName;
+    // reset fields
+    document.getElementById('custName').value = '';
+    document.getElementById('custPhone').value = '';
+    document.getElementById('custQty').value = 2;
+    document.getElementById('custDate').value = '';
+    document.getElementById('orderTotal').innerText = '';
+    document.getElementById('orderPopup').style.display = 'flex';
+    document.getElementById('orderPopup').setAttribute('aria-hidden','false');
+}
+
+/* open order from inside description popup: use currentDescId paket if available */
+function openOrderFromDesc(){
+    if(currentDescId) {
+        const d = descriptions[currentDescId];
+        openOrder(d.title, (d.title.includes('Pantai') ? 450000 : (d.title.includes('Bukit')?350000:500000)));
+        closeDesc();
+    } else {
+        openOrder('Paket Wisata', 0);
+    }
+}
+
+function closeOrder() {
+    document.getElementById('orderPopup').style.display = 'none';
+    document.getElementById('orderPopup').setAttribute('aria-hidden','true');
+}
+
+/* calculate total: (transport+makan+penginapan) * hari * qty
+   Note: there's no hari field separately, we will assume hari = 1 if not provided.
+*/
+function calculateTotal() {
+    const qty = parseInt(document.getElementById('custQty').value) || 1;
+    const paketPrice = lastOrderPaket.price || 0;
+
+    let tambahan = 0;
+
+    if (document.getElementById('cbTransport').checked)
+        tambahan += parseInt(document.getElementById('cbTransport').value);
+
+    if (document.getElementById('cbMakan').checked)
+        tambahan += parseInt(document.getElementById('cbMakan').value);
+
+    if (document.getElementById('cbPenginapan').checked)
+        tambahan += parseInt(document.getElementById('cbPenginapan').value);
+
+    const total = (paketPrice + tambahan) * qty;
+
+    document.getElementById('orderTotal').innerText =
+        "Total Harga: Rp " + total.toLocaleString('id-ID');
+
+    return total;
+}
+
+
+
+/* simple save: currently just shows alert and closes popup */
+function saveOrder() {
+    const nama = document.getElementById('custName').value.trim();
+    const no_hp = document.getElementById('custPhone').value.trim();
+    const jumlah = document.getElementById('custQty').value;
+    const tanggal = document.getElementById('custDate').value;
+    const paket = lastOrderPaket.name;
+
+    const cbTransport = document.getElementById('cbTransport');
+    const cbMakan = document.getElementById('cbMakan');
+    const cbPenginapan = document.getElementById('cbPenginapan');
+
+    if (!nama || !no_hp) {
+        alert("Nama dan No HP wajib diisi!");
+        return;
+    }
+
+    const total = calculateTotal();
+
+    const data = new FormData();
+    data.append("nama", nama);
+    data.append("no_hp", no_hp);
+    data.append("paket", paket);
+    data.append("jumlah", jumlah);
+    data.append("tanggal", tanggal);
+
+    // SIMPAN Y / N
+    data.append("transport", cbTransport.checked ? 'Y' : 'N');
+    data.append("makan", cbMakan.checked ? 'Y' : 'N');
+    data.append("penginapan", cbPenginapan.checked ? 'Y' : 'N');
+
+    data.append("total", total);
+
+    fetch("simpan.php", {
+        method: "POST",
+        body: data
+    })
+    .then(res => res.text())
+    .then(res => {
+        alert(res); // tampilkan respon PHP
+        closeOrder();
+
+        // reset checkbox SETELAH sukses
+        cbTransport.checked = false;
+        cbMakan.checked = false;
+        cbPenginapan.checked = false;
+    })
+    .catch(err => {
+        alert("Gagal menyimpan data");
+        console.error(err);
+    });
+}
+
+</script>
+</body>
+</html>
